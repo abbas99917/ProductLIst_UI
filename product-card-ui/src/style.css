@@ -1,95 +1,194 @@
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+/* =========================
+   RESET
+========================= */
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-body{
-    background-color: #F3F4F4;
+
+html {
+  scroll-behavior: smooth;
 }
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  background: #f3f4f4;
+  color: #222;
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
 header {
+  width: 100%;
+  min-height: 75px;
+  padding: 15px 5%;
+  background: #fafafa;
+  border-bottom: 1px solid #e7e7e7;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 15px 40px;
-  background-color: #FAFAFA;
-  border-bottom: 1px solid #fff;
+
   position: sticky;
   top: 0;
   z-index: 1000;
+
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.04);
 }
+
+
+/* =========================
+   LOGO
+========================= */
 
 .logo h1 {
   margin: 0;
-  font-size: 28px;
+  color: #222;
+  font-size: clamp(22px, 2.5vw, 30px);
+  font-weight: 800;
+  letter-spacing: -0.5px;
 }
+
+
+/* =========================
+   SEARCH + CART
+========================= */
 
 .SearchContainer {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 25px;
 }
 
 #SearchProduct {
-  width: 300px;
-  padding: 10px 15px;
+  width: 320px;
+  height: 44px;
+
+  padding: 0 18px;
+
+  background: #fff;
   border: 1px solid #ddd;
   border-radius: 25px;
+
   outline: none;
+
+  font-size: 14px;
+  color: #222;
+
+  transition: 0.3s ease;
 }
+
+#SearchProduct::placeholder {
+  color: #999;
+}
+
+#SearchProduct:focus {
+  border-color: #8cc7c4;
+  box-shadow: 0 0 0 4px rgba(140, 199, 196, 0.15);
+}
+
+
+/* =========================
+   CART ICON
+========================= */
 
 .spin {
   position: relative;
+  flex-shrink: 0;
 }
 
 .spin a {
-  color: #333;
-  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #222;
+  font-size: 25px;
+
   text-decoration: none;
+
+  transition: 0.3s ease;
+}
+
+.spin a:hover {
+  color: #8cc7c4;
+  transform: translateY(-2px);
 }
 
 .cart-count {
   position: absolute;
+
   top: -10px;
-  right: -10px;
-  background: #8CC7C4;
-  color: white;
-  font-size: 12px;
-  padding: 3px 7px;
+  right: -11px;
+
+  min-width: 20px;
+  height: 20px;
+
+  padding: 2px 5px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #8cc7c4;
+  color: #fff;
+
   border-radius: 50%;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  border: 2px solid #fafafa;
 }
 
 
-
-
-/* container cart styling start from here */
+/* =========================
+   PRODUCT CONTAINER
+========================= */
 
 .ContainerCardSections {
   width: 100%;
-  max-width: 1400px;
+  max-width: 1450px;
+
   margin: 40px auto;
   padding: 0 40px;
 
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 25px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 28px;
 }
 
-/* ================= CARD ================= */
+
+/* =========================
+   CARD
+========================= */
 
 .card {
   position: relative;
+
+  min-width: 0;
   overflow: hidden;
 
   padding: 15px;
 
   background: #fff;
+
   border: 1px solid #e8e8e8;
   border-radius: 18px;
 
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
 
-  transition: 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .card:hover {
@@ -97,10 +196,14 @@ header {
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.11);
 }
 
-/* ================= CATEGORY ================= */
+
+/* =========================
+   CATEGORY
+========================= */
 
 .category {
   position: absolute;
+
   top: 25px;
   left: 25px;
 
@@ -111,14 +214,18 @@ header {
 
   border-radius: 20px;
 
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 11px;
+  font-weight: 700;
+
   text-transform: capitalize;
 
   z-index: 2;
 }
 
-/* ================= IMAGE ================= */
+
+/* =========================
+   IMAGE
+========================= */
 
 .proImg {
   width: 100%;
@@ -127,16 +234,20 @@ header {
   display: block;
 
   object-fit: cover;
+
   border-radius: 14px;
 
-  transition: 0.4s ease;
+  transition: transform 0.4s ease;
 }
 
 .card:hover .proImg {
   transform: scale(1.04);
 }
 
-/* ================= PRODUCT NAME ================= */
+
+/* =========================
+   PRODUCT INFO
+========================= */
 
 .productName {
   margin: 15px 0 7px;
@@ -146,10 +257,19 @@ header {
   font-size: 19px;
   font-weight: 700;
 
+  line-height: 1.3;
+
   text-transform: capitalize;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-/* ================= RATING ================= */
+
+/* =========================
+   RATING
+========================= */
 
 .rating {
   display: flex;
@@ -157,10 +277,14 @@ header {
   gap: 3px;
 
   color: #f5b301;
+
   font-size: 13px;
 }
 
-/* ================= DESCRIPTION ================= */
+
+/* =========================
+   DESCRIPTION
+========================= */
 
 .descriptions {
   margin: 12px 0;
@@ -173,15 +297,23 @@ header {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+
   overflow: hidden;
 }
 
-/* ================= PRICE + QUANTITY + STOCK ================= */
+
+/* =========================
+   PRICE / QUANTITY / STOCK
+========================= */
 
 .card > div:nth-of-type(2) {
+  min-height: 65px;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  gap: 10px;
 
   margin: 15px 0;
   padding: 12px 0;
@@ -190,7 +322,10 @@ header {
   border-bottom: 1px solid #eee;
 }
 
-/* Price */
+
+/* =========================
+   PRICE
+========================= */
 
 .price {
   margin: 0;
@@ -203,12 +338,17 @@ header {
 
 .price::before {
   content: "Rs. ";
+
   color: #888;
+
   font-size: 12px;
   font-weight: 500;
 }
 
-/* ================= QUANTITY ================= */
+
+/* =========================
+   QUANTITY
+========================= */
 
 .quantity-box {
   display: flex;
@@ -218,6 +358,8 @@ header {
 
   border: 1px solid #ddd;
   border-radius: 8px;
+
+  background: #fff;
 }
 
 .quantity-box span {
@@ -229,7 +371,6 @@ header {
   justify-content: center;
 
   background: #f7f7f7;
-
   color: #222;
 
   font-size: 16px;
@@ -242,10 +383,12 @@ header {
 
 .quantity-box span:hover {
   background: #8cc7c4;
+  color: #fff;
 }
 
-.quantity {
+.quantity-box p {
   width: 30px;
+
   margin: 0;
 
   text-align: center;
@@ -254,7 +397,10 @@ header {
   font-weight: 600;
 }
 
-/* ================= STOCK ================= */
+
+/* =========================
+   STOCK
+========================= */
 
 .stock {
   margin: 0;
@@ -262,18 +408,24 @@ header {
   color: #777;
 
   font-size: 12px;
+
+  white-space: nowrap;
 }
 
 .stock::before {
   content: "Stock: ";
+
   color: #aaa;
 }
 
-/* ================= BUTTON ================= */
+
+/* =========================
+   ADD TO CART BUTTON
+========================= */
 
 .card button {
   width: 100%;
-  height: 45px;
+  min-height: 45px;
 
   border: none;
   border-radius: 10px;
@@ -284,6 +436,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
+
   gap: 9px;
 
   font-size: 14px;
@@ -291,12 +444,16 @@ header {
 
   cursor: pointer;
 
-  transition: 0.3s ease;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    transform 0.3s ease;
 }
 
 .card button:hover {
   background: #8cc7c4;
   color: #222;
+
   transform: translateY(-2px);
 }
 
@@ -304,37 +461,237 @@ header {
   font-size: 15px;
 }
 
-/* ================= TABLET ================= */
 
-@media (max-width: 1100px) {
-  .ContainerCardSections {
-    grid-template-columns: repeat(3, 1fr);
+/* =========================
+   LARGE TABLET
+========================= */
+
+@media (max-width: 1200px) {
+
+  header {
+    padding: 15px 30px;
   }
+
+  .ContainerCardSections {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    padding: 0 30px;
+    gap: 22px;
+  }
+
 }
 
-/* ================= SMALL TABLET ================= */
 
-@media (max-width: 800px) {
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 900px) {
+
+  header {
+    padding: 14px 25px;
+  }
+
+  .logo h1 {
+    font-size: 24px;
+  }
+
+  .SearchContainer {
+    gap: 18px;
+  }
+
+  #SearchProduct {
+    width: 260px;
+  }
+
   .ContainerCardSections {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
     padding: 0 25px;
+
+    margin-top: 30px;
+
+    gap: 20px;
   }
+
 }
 
-/* ================= MOBILE ================= */
 
-@media (max-width: 520px) {
+/* =========================
+   SMALL TABLET
+========================= */
+
+@media (max-width: 700px) {
+
+  header {
+    min-height: 68px;
+    padding: 12px 20px;
+  }
+
+  .logo {
+    display: none;
+  }
+
+  .SearchContainer {
+    width: 100%;
+    justify-content: flex-end;
+    gap: 15px;
+  }
+
+  #SearchProduct {
+    width: 100%;
+    max-width: none;
+  }
+
+  .ContainerCardSections {
+    padding: 0 20px;
+    gap: 18px;
+  }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 550px) {
+
+  header {
+    padding: 12px 15px;
+  }
+
+  .SearchContainer {
+    gap: 12px;
+  }
+
+  #SearchProduct {
+    height: 42px;
+
+    padding: 0 14px;
+
+    font-size: 13px;
+  }
+
+  .spin a {
+    font-size: 23px;
+  }
+
+  .cart-count {
+    top: -9px;
+    right: -9px;
+
+    min-width: 18px;
+    height: 18px;
+
+    font-size: 9px;
+  }
+
   .ContainerCardSections {
     grid-template-columns: 1fr;
-    padding: 0 18px;
-    margin-top: 25px;
-  }
 
-  .proImg {
-    height: 250px;
+    margin: 25px auto;
+
+    padding: 0 15px;
+
+    gap: 20px;
   }
 
   .card {
     padding: 13px;
+
+    border-radius: 16px;
   }
+
+  .proImg {
+    height: 260px;
+  }
+
+  .category {
+    top: 22px;
+    left: 22px;
+
+    padding: 5px 11px;
+
+    font-size: 10px;
+  }
+
+  .productName {
+    font-size: 18px;
+  }
+
+  .descriptions {
+    font-size: 13px;
+  }
+
+  .price {
+    font-size: 19px;
+  }
+
+}
+
+
+/* =========================
+   VERY SMALL MOBILE
+========================= */
+
+@media (max-width: 380px) {
+
+  header {
+    padding: 10px 12px;
+  }
+
+  .SearchContainer {
+    gap: 9px;
+  }
+
+  #SearchProduct {
+    height: 40px;
+
+    padding: 0 12px;
+
+    font-size: 12px;
+  }
+
+  .spin a {
+    font-size: 21px;
+  }
+
+  .ContainerCardSections {
+    padding: 0 12px;
+  }
+
+  .proImg {
+    height: 230px;
+  }
+
+  .productName {
+    font-size: 17px;
+  }
+
+  .card > div:nth-of-type(2) {
+    gap: 6px;
+  }
+
+  .price {
+    font-size: 17px;
+  }
+
+  .quantity-box span {
+    width: 27px;
+    height: 28px;
+  }
+
+  .quantity-box p {
+    width: 27px;
+  }
+
+  .stock {
+    font-size: 11px;
+  }
+
+  .card button {
+    min-height: 43px;
+    font-size: 13px;
+  }
+
 }
